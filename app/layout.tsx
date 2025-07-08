@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description: "Know Your Strengths, Unlock New Opportunities",
     type: "website",
   },
-    generator: 'v0.dev'
+    creator: "Samuel ABAYIZERA",
 }
 
 export default function RootLayout({
