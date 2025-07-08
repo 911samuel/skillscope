@@ -9,8 +9,8 @@
 
 ## 🚀 Live Demo
 
-* **Deployed Link:** [https://skillscope.vercel.app](https://skillscope.vercel.app)
-* **Repository:** [https://github.com/yourusername/skillscope](https://github.com/yourusername/skillscope)
+* **Deployed Link:** [SkillScope Website](https://skillscope-gv3aye2a9-abayizera-samuels-projects.vercel.app/)
+* **Repository:** [SkillScope Repo](https://github.com/911samuel/skillscope.git)
 
 ---
 
@@ -110,9 +110,9 @@ The application emphasizes an intuitive, mobile-friendly interface and clean, ma
        ↓
 [ API Route (/api/skill-profile) ]
        |
-       | (Fetch OpenAI completion)
+       | (Fetch OpenRouter completion)
        ↓
-[ OpenRouter GPT-4 ]
+[ OpenRouter ]
        ↓
 [ API returns summary + suggestions ]
        |
@@ -179,14 +179,14 @@ Visit: `http://localhost:3000`
 <details>
 <summary>Click to view</summary>
 
-**Screenshot 7**  
-![Screenshot 7](/Screenshot%20(7).png)
+**Home Page**  
+![Home Page](./public/Screenshot%20(8).png)
 
-**Screenshot 8**  
-![Screenshot 8](/Screenshot%20(8).png)
+**Skills Page**  
+![Skills Page](./public/Screenshot%20(7).png)
 
-**Screenshot 9**  
-![Screenshot 9](/Screenshot%20(9).png)
+**Results Page**  
+![Results Page](./public/Screenshot%20(9).png)
 
 </details>
 
@@ -197,7 +197,6 @@ Visit: `http://localhost:3000`
 * Add persistent user history (optional sign-in with NextAuth).
 * Include richer visualizations (like radar charts of skills).
 * Allow users to download their skill profile as PDF.
-* Integrate share functionality with Twitter/LinkedIn.
 
 ---
 
@@ -209,7 +208,7 @@ MIT — feel free to explore and extend.
 
 ## 🙌 Acknowledgements
 
-* [OpenAI](https://openai.com/) for the powerful language models.
+* [OpenRouter](https://openrouter.ai/) for the powerful language models.
 * [Tailwind CSS](https://tailwindcss.com/) for making design a delight.
 * [Vercel](https://vercel.com/) for effortless deployment.
 
