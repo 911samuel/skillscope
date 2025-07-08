@@ -84,7 +84,7 @@ export default function ResultsPage() {
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Your Skill Profile Results</h1>
           <p className="text-lg text-gray-600">
-            Here's what our AI discovered about your skills and growth opportunities.
+            Here&apos;s what our AI discovered about your skills and growth opportunities.
           </p>
         </div>
 
@@ -124,7 +124,7 @@ export default function ResultsPage() {
                   <Brain className="h-5 w-5 mr-2 text-purple-600" />
                   AI-Generated Profile Summary
                 </CardTitle>
-                <CardDescription>Based on your skills and experience, here's your professional profile</CardDescription>
+                <CardDescription>Based on your skills and experience, here&apos;s your professional profile</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-6 rounded-lg border-l-4 border-purple-500">
