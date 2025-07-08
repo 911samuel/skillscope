@@ -12,10 +12,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Brain, ArrowLeft, Loader2 } from "lucide-react";
-import { TextInput } from "../../components/TextInput";
-import { TextAreaInput } from "../../components/TextAreaInput";
+import { TextInput } from "@/components/TextInput";
+import { TextAreaInput } from "@/components/TextAreaInput";
 import { FormData, FormErrors } from "../../types/types";
-import { validateForm } from "../../hooks/useSkillCheckValidation";
+import { validateForm } from "@/hooks/useSkillCheckValidation";
 
 export default function SkillCheckPage() {
   const router = useRouter();

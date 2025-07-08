@@ -1,4 +1,6 @@
-export const features = [
+import { Feature } from "@/types/homePageTypes"
+
+export const features: Feature[] = [
   {
     id: 1,
     title: "AI-Powered Analysis",
