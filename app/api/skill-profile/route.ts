@@ -1,80 +1,157 @@
-import { type NextRequest, NextResponse } from "next/server"
-import { generateText } from "ai"
-import { openai } from "@ai-sdk/openai"
+import { type NextRequest, NextResponse } from "next/server";
+import OpenAI from "openai";
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 interface SkillProfileRequest {
-  name: string
-  email: string
-  primarySkill: string
-  experience: string
+  name: string;
+  email: string;
+  primarySkill: string;
+  experience: string;
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const body: SkillProfileRequest = await request.json()
+    // Check if OpenAI API key is configured
+    if (!process.env.OPENAI_API_KEY) {
+      console.error("OpenAI API key is not configured");
+      return NextResponse.json(
+        { error: "OpenAI API key is not configured" },
+        { status: 500 }
+      );
+    }
+
+    const body: SkillProfileRequest = await request.json();
 
     // Validate required fields
     if (!body.name || !body.email || !body.primarySkill || !body.experience) {
-      return NextResponse.json({ error: "All fields are required" }, { status: 400 })
+      return NextResponse.json(
+        {
+          error:
+            "All fields (name, email, primarySkill, experience) are required",
+        },
+        { status: 400 }
+      );
     }
 
-    // Validate experience length
-    if (body.experience.length > 300) {
-      return NextResponse.json({ error: "Experience description must be 300 characters or less" }, { status: 400 })
+    // In local development, provide mock response to avoid quota consumption
+    if (process.env.NODE_ENV === "development") {
+      return NextResponse.json({
+        analysis: {
+          summary: "Mock analysis summary for local testing.",
+          strengths: [`Good foundation in ${body.primarySkill}`],
+          areasForImprovement: ["Time management", "Team collaboration"],
+          recommendedLearningPaths: [
+            `Deep dive into advanced ${body.primarySkill}`,
+            "Explore system design concepts",
+          ],
+          careerAdvice:
+            "Focus on building a portfolio of projects that demonstrate practical use of your primary skill.",
+        },
+        timestamp: new Date().toISOString(),
+        user: {
+          name: body.name,
+          email: body.email,
+          primarySkill: body.primarySkill,
+        },
+      });
     }
 
-    // Create the prompt for OpenAI
     const prompt = `
-    Analyze the following user's skill profile and provide:
-    1. A brief 2-3 sentence professional summary of their expertise
-    2. Two specific, relevant skill areas they should consider exploring next
+    Analyze the following skill profile and provide personalized growth opportunities and recommendations:
 
-    User Profile:
-    - Name: ${body.name}
-    - Primary Skill: ${body.primarySkill}
-    - Experience: ${body.experience}
+    Name: ${body.name}
+    Email: ${body.email}
+    Primary Skill: ${body.primarySkill}
+    Experience Description: ${body.experience}
 
-    Please format your response as JSON with the following structure:
+    Provide your analysis in JSON format:
     {
-      "summary": "Professional summary here",
-      "suggestions": ["First skill suggestion", "Second skill suggestion"]
+      "summary": "Brief summary of the skill profile",
+      "strengths": ["list of strengths"],
+      "areasForImprovement": ["list of areas for improvement"],
+      "recommendedLearningPaths": ["list of recommended learning paths or skills to develop"],
+      "careerAdvice": "General career advice based on the profile"
     }
+    `;
 
-    Make the suggestions specific, actionable, and complementary to their existing skill. Focus on skills that would enhance their career prospects and build upon their current expertise.
-    `
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o-2024-08-06",
+      messages: [{ role: "user", content: prompt }],
+      temperature: 0.3,
+    });
 
-    // Generate response using OpenAI
-    const { text } = await generateText({
-      model: openai("gpt-4o"),
-      prompt: prompt,
-      temperature: 0.7,
-    })
+    const text = response.choices[0].message?.content || "";
 
-    // Parse the JSON response
-    let parsedResponse
+    let parsedResponse;
     try {
-      parsedResponse = JSON.parse(text)
+      // Clean up markdown artifacts
+      const cleanText = text.replace(/```json\n?|```\n?/g, "").trim();
+      parsedResponse = JSON.parse(cleanText);
     } catch (parseError) {
-      console.error("Failed to parse OpenAI response:", parseError)
-      return NextResponse.json({ error: "Failed to process AI response" }, { status: 500 })
-    }
+      console.error("Failed to parse AI response:", parseError);
+      console.error("Raw AI response:", text);
 
-    // Validate the response structure
-    if (
-      !parsedResponse.summary ||
-      !Array.isArray(parsedResponse.suggestions) ||
-      parsedResponse.suggestions.length !== 2
-    ) {
-      console.error("Invalid response structure from OpenAI")
-      return NextResponse.json({ error: "Invalid AI response format" }, { status: 500 })
+      // Fallback if AI output is malformed
+      return NextResponse.json({
+        analysis: {
+          summary: "Unable to process the full analysis at this time.",
+          strengths: [`Experience in ${body.primarySkill}`],
+          areasForImprovement: ["Continuous learning and skill development"],
+          recommendedLearningPaths: [
+            `Advanced ${body.primarySkill} techniques`,
+          ],
+          careerAdvice:
+            "Focus on building expertise in your primary skill while exploring related technologies.",
+        },
+        timestamp: new Date().toISOString(),
+        user: {
+          name: body.name,
+          email: body.email,
+          primarySkill: body.primarySkill,
+        },
+      });
     }
 
     return NextResponse.json({
-      summary: parsedResponse.summary,
-      suggestions: parsedResponse.suggestions,
-    })
-  } catch (error) {
-    console.error("Error in skill-profile API:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+      analysis: parsedResponse,
+      timestamp: new Date().toISOString(),
+      user: {
+        name: body.name,
+        email: body.email,
+        primarySkill: body.primarySkill,
+      },
+    });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    console.error("Error in skill profile API:", error);
+
+    // Handle OpenAI quota / rate limit explicitly
+    if (
+      error.statusCode === 429 ||
+      (error.response && error.response.status === 429)
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "OpenAI quota exceeded or rate limited. Please try again later.",
+        },
+        { status: 429 }
+      );
+    }
+
+    if (error instanceof Error) {
+      return NextResponse.json(
+        { error: `Server error: ${error.message}` },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }
