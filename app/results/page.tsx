@@ -14,9 +14,9 @@ import {
   Brain,
   ArrowLeft,
   RotateCcw,
-  Share2,
   Lightbulb,
   User,
+  Share2,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -46,7 +46,6 @@ export default function ResultsPage() {
     if (storedResult) {
       setResult(JSON.parse(storedResult));
     } else {
-      // Redirect to skill check if no results found
       router.push("/skill-check");
     }
     setIsLoading(false);
@@ -55,12 +54,6 @@ export default function ResultsPage() {
   const handleRestart = () => {
     sessionStorage.removeItem("skillProfileResult");
     router.push("/skill-check");
-  };
-
-  const handleShare = () => {
-    alert(
-      "Share functionality would be implemented here! 🚀\n\nThis would allow users to share their skill profile on LinkedIn, Twitter, or other platforms."
-    );
   };
 
   if (isLoading) {
@@ -78,6 +71,17 @@ export default function ResultsPage() {
     return null;
   }
 
+  // Short summary for social
+  const shortSummary =
+    result.analysis.summary.length > 120
+      ? result.analysis.summary.slice(0, 120) + "..."
+      : result.analysis.summary;
+
+  const handleShare = `https://x.com/intent/tweet?text=${encodeURIComponent(
+    `My SkillScope Summary: ${shortSummary}\nRecommended: ${result.analysis.recommendedLearningPaths.join(
+      ", "
+    )}`
+  )}`;
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       <header className="container mx-auto px-4 py-6">
@@ -204,7 +208,7 @@ export default function ResultsPage() {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+        <div className="flex flex-col sm:flex-row gap-6 justify-center mt-12 items-center">
           <Button
             onClick={handleRestart}
             variant="outline"
@@ -215,7 +219,7 @@ export default function ResultsPage() {
             Analyze Another Skill
           </Button>
           <Button
-            onClick={handleShare}
+            onClick={() => window.open(handleShare, "_blank")}
             size="lg"
             className="px-8 py-3 text-lg bg-green-600 hover:bg-green-700 text-white"
           >
@@ -223,7 +227,6 @@ export default function ResultsPage() {
             Share Results
           </Button>
         </div>
-
         <div className="text-center mt-12 p-6 bg-white rounded-lg shadow-md">
           <h3 className="text-xl font-semibold text-gray-900 mb-2">
             Ready to Level Up Your Skills?
