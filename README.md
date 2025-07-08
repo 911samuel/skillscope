@@ -9,7 +9,7 @@
 
 ## 🚀 Live Demo
 
-* **Deployed Link:** [SkillScope Website](https://skillscope-gv3aye2a9-abayizera-samuels-projects.vercel.app/)
+* **Deployed Link:** [SkillScope Website](https://skillscope-abayizera-samuels-projects.vercel.app/)
 * **Repository:** [SkillScope Repo](https://github.com/911samuel/skillscope.git)
 
 ---
