@@ -16,12 +16,18 @@ export function Header() {
         </div>
         <nav className="flex items-center space-x-6">
           <div className="hidden md:flex space-x-6">
-              <a href="#features" className="text-black">
-                Features
-              </a>
-              <a href="#how-it-works" className="text-black">
-                How it Works
-              </a>
+            <a
+              href="#features"
+              className="text-foreground dark:text-foreground"
+            >
+              Features
+            </a>
+            <a
+              href="#how-it-works"
+              className="text-foreground dark:text-foreground"
+            >
+              How it Works
+            </a>
           </div>
           <ThemeToggle />
         </nav>
