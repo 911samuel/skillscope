@@ -45,10 +45,10 @@ export default function ResultsPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-background flex items-center justify-center">
         <div className="text-center">
-          <Brain className="h-12 w-12 text-blue-600 animate-pulse mx-auto mb-4" />
-          <p className="text-lg text-gray-600">Loading your results...</p>
+          <Brain className="h-12 w-12 text-primary animate-pulse mx-auto mb-4" />
+          <p className="text-lg text-muted-foreground">Loading your results...</p>
         </div>
       </div>
     )
@@ -59,12 +59,12 @@ export default function ResultsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-background">
       <header className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-            <Brain className="h-8 w-8 text-blue-600" />
-            <span className="text-2xl font-bold text-gray-900">SkillScope</span>
+            <Brain className="h-8 w-8 text-primary" />
+            <span className="text-2xl font-bold text-foreground">SkillScope</span>
           </Link>
           <Link href="/">
             <Button variant="ghost" size="sm">
@@ -77,8 +77,8 @@ export default function ResultsPage() {
 
       <main className="container mx-auto px-4 py-8 max-w-4xl">
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Your Skill Profile Results</h1>
-          <p className="text-lg text-gray-600">Here&apos;s what our AI discovered about your skills and growth opportunities.</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Your Skill Profile Results</h1>
+          <p className="text-lg text-muted-foreground">Here&apos;s what our AI discovered about your skills and growth opportunities.</p>
         </div>
 
         <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-3">

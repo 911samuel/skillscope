@@ -37,9 +37,9 @@ export function TextAreaInput({
         maxLength={maxLength}
       />
       <div className="flex justify-between items-center">
-        <div>{error && <p className="text-sm text-red-600">{error}</p>}</div>
+        <div>{error && <p className="text-sm text-destructive">{error}</p>}</div>
         {maxLength !== undefined && (
-          <p className="text-sm text-gray-500">{value.length}/{maxLength} characters</p>
+          <p className="text-sm text-muted-foreground">{value.length}/{maxLength} characters</p>
         )}
       </div>
     </div>
