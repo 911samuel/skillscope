@@ -6,24 +6,24 @@ export const features: Feature[] = [
     title: "AI-Powered Analysis",
     description: "Advanced AI analyzes your skills and experience to provide personalized insights",
     icon: "Brain",
-    iconColor: "text-blue-600",
-    iconBgColor: "bg-blue-100",
+    iconColor: "text-primary",
+    iconBgColor: "bg-primary/10",
   },
   {
     id: 2,
     title: "Smart Suggestions",
     description: "Get tailored recommendations for new skill areas to expand your expertise",
     icon: "Target",
-    iconColor: "text-purple-600",
-    iconBgColor: "bg-purple-100",
+    iconColor: "text-secondary",
+    iconBgColor: "bg-secondary/10",
   },
   {
     id: 3,
     title: "Instant Results",
     description: "Receive your professional profile summary and growth opportunities in seconds",
     icon: "Zap",
-    iconColor: "text-green-600",
-    iconBgColor: "bg-green-100",
+    iconColor: "text-accent",
+    iconBgColor: "bg-accent/10"
   },
 ]
 

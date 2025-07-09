@@ -10,11 +10,10 @@ export default function HomePage() {
   return (
     <div
       className="min-h-screen"
-      style={{ background: "var(--gradient-background)" }}
     >
       <Header />
 
-      <main className="container py-12 md:py-20">
+      <main className="min-h-screen">
         <HeroSection />
 
         {/* Features Preview */}

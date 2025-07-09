@@ -25,8 +25,8 @@ export function FeatureCard({ feature }: FeatureCardProps) {
         >
           <IconComponent className={`h-8 w-8 ${feature.iconColor}`} />
         </div>
-        <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-        <p>{feature.description}</p>
+        <h3 className="text-xl font-semibold text-foreground mb-2">{feature.title}</h3>
+        <p className="text-muted-foreground">{feature.description}</p>
       </div>
     </>
   );

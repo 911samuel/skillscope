@@ -13,7 +13,7 @@ export function ProfileSummaryCard({ summary }: ProfileSummaryCardProps) {
     <Card className="shadow-lg">
       <CardHeader>
         <CardTitle className="flex items-center">
-          <Brain className="h-5 w-5 mr-2 text-purple-600" />
+          <Brain className="h-5 w-5 mr-2 text-primary" />
           AI-Generated Profile Summary
         </CardTitle>
         <CardDescription>
@@ -21,8 +21,8 @@ export function ProfileSummaryCard({ summary }: ProfileSummaryCardProps) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-6 rounded-lg border-l-4 border-purple-500">
-          <p className="text-gray-800 leading-relaxed text-lg">{summary}</p>
+        <div className="bg-gradient-background-card p-6 rounded-lg border-l-4 border-primary">
+          <p className="text-foreground leading-relaxed text-lg">{summary}</p>
         </div>
       </CardContent>
     </Card>
