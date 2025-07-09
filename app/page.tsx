@@ -8,10 +8,13 @@ import { features, howItWorksSteps } from "../data/homePageData";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div
+      className="min-h-screen"
+      style={{ background: "var(--gradient-background)" }}
+    >
       <Header />
 
-      <main className="container mx-auto px-4 py-12 md:py-20">
+      <main className="container py-12 md:py-20">
         <HeroSection />
 
         {/* Features Preview */}
@@ -26,9 +29,7 @@ export default function HomePage() {
 
         {/* How it Works */}
         <div id="how-it-works" className="mt-20 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12">
-            How It Works
-          </h2>
+          <h2 className="text-3xl font-bold mb-12">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {howItWorksSteps.map((step) => (
               <HowItWorksStep

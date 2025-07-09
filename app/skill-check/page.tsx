@@ -81,7 +81,10 @@ export default function SkillCheckPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div
+      className="min-h-screen"
+      style={{ background: "var(--gradient-background)" }}
+    >
       {/* Header */}
       <header className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between">
@@ -89,8 +92,8 @@ export default function SkillCheckPage() {
             href="/"
             className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
           >
-            <Brain className="h-8 w-8 text-blue-600" />
-            <span className="text-2xl font-bold text-gray-900">SkillScope</span>
+            <Brain className="h-8 w-8 text-primary" />
+            <span className="text-2xl font-bold">SkillScope</span>
           </Link>
           <Link href="/">
             <Button variant="ghost" size="sm">
@@ -102,27 +105,27 @@ export default function SkillCheckPage() {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8 max-w-2xl">
+      <main className="mx-auto px-4 py-8 max-w-3xl">
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">
             Tell Us About Your Skills
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg">
             Share your expertise and let our AI analyze your profile to suggest
             new growth opportunities.
           </p>
         </div>
 
-        <Card className="shadow-lg">
-          <CardHeader>
-            <CardTitle>Skill Profile Form</CardTitle>
+        <Card className="card shadow-lg">
+          <CardHeader className="p-4">
+            <CardTitle className="text-xl">Skill Profile Form</CardTitle>
             <CardDescription>
               Fill out the form below to get your personalized skill analysis
               and recommendations.
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <CardContent className="p-4 pt-0">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <TextInput
                 id="name"
                 label="Full Name *"
@@ -159,7 +162,7 @@ export default function SkillCheckPage() {
               />
               <Button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg"
+                className="btn btn-primary w-full py-3 text-lg"
                 disabled={isLoading}
               >
                 {isLoading ? (
